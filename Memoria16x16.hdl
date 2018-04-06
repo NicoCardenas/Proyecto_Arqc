@@ -1,0 +1,24 @@
+CHIP Memoria16x16 {
+    IN in[16], load, address[4];
+    OUT out[16];
+
+    PARTS:
+	    DMux16Way(in=load, sel=address, a=loada, b=loadb, c=loadc, d=loadd, e=loade, f=loadf, g=loadg, h=loadh, i=loadi, j=loadj, k=loadk, l=loadl, m=loadm, n=loadn, o=loado, p=loadp);
+	    Register(in=in, load=loada,out=outa);
+	    Register(in=in, load=loadb,out=outb);
+	    Register(in=in, load=loadc,out=outc);
+	    Register(in=in, load=loadd,out=outd);
+	    Register(in=in, load=loade,out=oute);
+	    Register(in=in, load=loadf,out=outf);
+	    Register(in=in, load=loadg,out=outg);
+	    Register(in=in, load=loadh,out=outh);
+	    Register(in=in, load=loadi,out=outi);
+	    Register(in=in, load=loadj,out=outj);
+	    Register(in=in, load=loadk,out=outk);
+	    Register(in=in, load=loadl,out=outl);
+	    Register(in=in, load=loadm,out=outm);
+	    Register(in=in, load=loadn,out=outn);
+	    Register(in=in, load=loado,out=outo);
+	    Register(in=in, load=loadp,out=outp);
+	    Mux16Way16(a=outa, b=outb, c=outc, d=outd, e=oute, f=outf, g=outg, h=outh, i=outi, j=outj, k=outk, l=outl, m=outm, n=outn, o=outo, p=outp, sel=address);
+	}

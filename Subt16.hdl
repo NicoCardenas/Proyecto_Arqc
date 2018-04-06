@@ -1,0 +1,8 @@
+CHIP Subt16 {
+	IN a[16], b[16];
+	OUT out[16];
+
+	PARTS:
+	Complement2(in=b, out=CompB);
+	Add16(a=a, b=CompB, out=out);
+}
