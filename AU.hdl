@@ -1,6 +1,6 @@
 CHIP AU {
     IN in[16];
-    OUT out[16], address[6];
+    OUT out[16], address[5];
 
     PARTS:
     AC(in=in, load=true, out=ac);
@@ -8,7 +8,7 @@ CHIP AU {
     InstruccionA(in=address1, load=true, out=address);
     Subt16(a=ac, b=in, out=resS);
     SubtCero16(in=ac, out=resSC);
-    //Jump
-    //Jump relativo / Skip
+    Jump(in=address1, out[0..4]=resJ);//Jump
+    //Jump relativo / Skip (se suma el bit a la izquierda al ci) 
     Mux4Way16(a=resS, b=resSC, c=resJ, d=resJR, sel=oper, out=out);
 }
