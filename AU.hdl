@@ -1,0 +1,14 @@
+CHIP AU {
+    IN in[16];
+    OUT out[16], address[6];
+
+    PARTS:
+    AC(in=in, load=true, out=ac);
+    Instruccion(in=in, load=true, address=address1, operation=oper);
+    InstruccionA(in=address1, load=true, out=address);
+    Subt16(a=ac, b=in, out=resS);
+    SubtCero16(in=ac, out=resSC);
+    //Jump
+    //Jump relativo / Skip
+    Mux4Way16(a=resS, b=resSC, c=resJ, d=resJR, sel=oper, out=out);
+}

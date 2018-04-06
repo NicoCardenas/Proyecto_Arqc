@@ -1,0 +1,47 @@
+CHIP Memoria32x16 {
+    IN in[16], load, address[5];
+    OUT out[16];
+
+    PARTS:
+    	DMux(in=in, sel=sel[4], a=out1, b=out2);
+	    DMux16Way(in=out1, sel=address[0..3], a=loada, b=loadb, c=loadc, d=loadd, e=loade, f=loadf, g=loadg, h=loadh, i=loadi, j=loadj, k=loadk, l=loadl, m=loadm, n=loadn, o=loado, p=loadp);
+	    DMux16Way(in=out2, sel=address[0..3], a=loadq, b=loadr, c=loads, d=loadt, e=loadu, f=loadv, g=loadw, h=loadx, i=loady, j=loadz, k=load0, l=load1, m=load2, n=load3, o=load4, p=load5);
+
+	    Register(in=in, load=loada, out=outa);
+	    Register(in=in, load=loadb, out=outb);
+	    Register(in=in, load=loadc, out=outc);
+	    Register(in=in, load=loadd, out=outd);
+	    Register(in=in, load=loade, out=oute);
+	    Register(in=in, load=loadf, out=outf);
+	    Register(in=in, load=loadg, out=outg);
+	    Register(in=in, load=loadh, out=outh);
+	    Register(in=in, load=loadi, out=outi);
+	    Register(in=in, load=loadj, out=outj);
+	    Register(in=in, load=loadk, out=outk);
+	    Register(in=in, load=loadl, out=outl);
+	    Register(in=in, load=loadm, out=outm);
+	    Register(in=in, load=loadn, out=outn);
+	    Register(in=in, load=loado, out=outo);
+	    Register(in=in, load=loadp, out=outp);
+
+	    Register(in=in, load=loada, out=outq);
+	    Register(in=in, load=loadb, out=outr);
+	    Register(in=in, load=loadc, out=outs);
+	    Register(in=in, load=loadd, out=outt);
+	    Register(in=in, load=loade, out=outu);
+	    Register(in=in, load=loadf, out=outv);
+	    Register(in=in, load=loadg, out=outw);
+	    Register(in=in, load=loadh, out=outx);
+	    Register(in=in, load=loadi, out=outy);
+	    Register(in=in, load=loadj, out=outz);
+	    Register(in=in, load=loadk, out=out0);
+	    Register(in=in, load=loadl, out=out1);
+	    Register(in=in, load=loadm, out=out2);
+	    Register(in=in, load=loadn, out=out3);
+	    Register(in=in, load=loado, out=out4);
+	    Register(in=in, load=loadp, out=out5);
+
+	    Mux16Way16(a=outa, b=outb, c=outc, d=outd, e=oute, f=outf, g=outg, h=outh, i=outi, j=outj, k=outk, l=outl, m=outm, n=outn, o=outo, p=outp, sel=address[0..3], out=out1);
+	    Mux16Way16(a=outq, b=outr, c=outs, d=outt, e=outu, f=outv, g=outw, h=outx, i=outy, j=outz, k=out0, l=out1, m=out2, n=out3, o=out4, p=out5, sel=address[0..3], out=out2);
+	    Mux16(a=out1, b=out2, sel=sel[4], out=out);
+	}
