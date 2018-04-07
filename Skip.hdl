@@ -1,0 +1,9 @@
+CHIP Skip {
+    IN in[5];
+    OUT out[5];
+
+    PARTS:
+    Register(in[11..15]=in, load=true, out[11..15]=outAdd);
+    Add16(a[11..15]=outAdd, b[15]=true, out[11..15]=outCI);
+    CI(in=outCI, out=out);
+}

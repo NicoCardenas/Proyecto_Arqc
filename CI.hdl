@@ -3,5 +3,5 @@ CHIP CI {
     OUT out[5];
 
     PARTS:
-    Register(in[0..4]=in, load=true, out[0..4]=out);
+    Register(in[11..15]=in, load=true, out[11..15]=out);
 }

@@ -3,6 +3,6 @@ CHIP Jump {
     OUT out[5];
 
     PARTS:
-    Register(in[0..4]=in, load=true, out[0..4]=outCI);
+    Register(in[11..15]=in, load=true, out[11..15]=outCI);
     CI(in=outCI, out=out);
 }
