@@ -24,22 +24,22 @@ CHIP Memoria32x16 {
     Register(in=in, load=loado, out=outo);
     Register(in=in, load=loadp, out=outp);
 
-    Register(in=in, load=loada, out=outq);
-    Register(in=in, load=loadb, out=outr);
-    Register(in=in, load=loadc, out=outs);
-    Register(in=in, load=loadd, out=outt);
-    Register(in=in, load=loade, out=outu);
-    Register(in=in, load=loadf, out=outv);
-    Register(in=in, load=loadg, out=outw);
-    Register(in=in, load=loadh, out=outx);
-    Register(in=in, load=loadi, out=outy);
-    Register(in=in, load=loadj, out=outz);
-    Register(in=in, load=loadk, out=out0);
-    Register(in=in, load=loadl, out=out1);
-    Register(in=in, load=loadm, out=out2);
-    Register(in=in, load=loadn, out=out3);
-    Register(in=in, load=loado, out=out4);
-    Register(in=in, load=loadp, out=out5);
+    Register(in=in, load=loadq, out=outq);
+    Register(in=in, load=loadr, out=outr);
+    Register(in=in, load=loads, out=outs);
+    Register(in=in, load=loadt, out=outt);
+    Register(in=in, load=loadu, out=outu);
+    Register(in=in, load=loadv, out=outv);
+    Register(in=in, load=loadw, out=outw);
+    Register(in=in, load=loadx, out=outx);
+    Register(in=in, load=loady, out=outy);
+    Register(in=in, load=loadz, out=outz);
+    Register(in=in, load=load0, out=out0);
+    Register(in=in, load=load1, out=out1);
+    Register(in=in, load=load2, out=out2);
+    Register(in=in, load=load3, out=out3);
+    Register(in=in, load=load4, out=out4);
+    Register(in=in, load=load5, out=out5);
 
     Mux16Way16(a=outa, b=outb, c=outc, d=outd, e=oute, f=outf, g=outg, h=outh, i=outi, j=outj, k=outk, l=outl, m=outm, n=outn, o=outo, p=outp, sel=address[0..3], out=exit1);
     Mux16Way16(a=outq, b=outr, c=outs, d=outt, e=outu, f=outv, g=outw, h=outx, i=outy, j=outz, k=out0, l=out1, m=out2, n=out3, o=out4, p=out5, sel=address[0..3], out=exit2);
