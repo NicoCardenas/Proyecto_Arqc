@@ -1,11 +1,11 @@
 CHIP AU {
     IN in[16];
-    OUT out[16], addre[5];
+    OUT out[16], address[5];
 
     PARTS:
     AC(in=in, out=ac);
     Instruccion(in=in, address=address1, operation=oper);
-    InstruccionA(in=address1, out=addre);
+    InstruccionA(in=address1, out=address);
     Subt16(a=ac, b=in, out=resS);
     SubtCero16(in=ac, out=resSC);
     Jump(in=address1, out=resJ); //Jump
