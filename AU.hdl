@@ -1,14 +1,14 @@
 CHIP AU {
     IN in[16];
-    OUT out[16], address[5];
+    OUT out[16], addre[5];
 
     PARTS:
-    AC(in=in, load=true, out=ac);
-    Instruccion(in=in, load=true, address=address1, operation=oper);
-    InstruccionA(in=address1, load=true, out=address);
+    AC(in=in, out=ac);
+    Instruccion(in=in, address=address1, operation=oper);
+    InstruccionA(in=address1, out=addre);
     Subt16(a=ac, b=in, out=resS);
     SubtCero16(in=ac, out=resSC);
     Jump(in=address1, out=resJ); //Jump
-    Skip(in=address1, out=resJR); //Jump relativo / Skip (se suma el bit a la izquierda al ci)
+    Skip(a=address1, b=ac, out=resJR); //Jump relativo / Skip (se suma el bit a la izquierda al ci)
     Mux8Way16(a[11..15]=resJ, b=resS, c=resSC, d[11..15]=resJR, e=false, f=false, g=false, h=false, sel=oper, out=out); // 000 Jump, 001 Subt, 010 SubtCero, 011 Skip.
 }

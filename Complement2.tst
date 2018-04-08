@@ -1,4 +1,4 @@
-// File name: projects/Complement2.tst
+// File name: Complement2.tst
 
 load Complement2.hdl,
 output-file Complement2.out,

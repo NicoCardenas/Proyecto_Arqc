@@ -1,7 +1,7 @@
 CHIP InstruccionA {
-    IN in[5], load;
+    IN in[5];
     OUT out[5];
 
     PARTS:
-    Register(in[11..15]=in, load=load, out[11..15]=out);
+    Register(in[11..15]=in, load=true, out[11..15]=out);
 }
