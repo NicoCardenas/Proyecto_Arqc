@@ -1,0 +1,30 @@
+CHIP Decoder3x8 {
+	IN in[3];
+	OUT a, b, c, d, e, f, g, h;
+
+	PARTS:
+	Not(in=in[0], out=notx);
+	Not(in=in[1], out=noty);
+	Not(in=in[2], out=notz);
+
+	And(a=notx, b=noty, out=notxnoty); // 000
+	And(a=notxnoty, b=notz, out=a);
+
+	And(a=notxnoty, b=in[2], out=b); //001
+
+	And(a=notx, b=in[1], out=notxy); // 010 
+	And(a=notxy, b=notz, out=c);
+
+	And(a=notxy, b=in[2], out=d); // 011
+
+	And(a=in[0], b=noty, out=xnoty); // 100
+	And(a=xnoty, b=notz, out=e);
+
+	And(a=xnoty, b=in[2], out=f); // 101
+
+	And(a=in[0], b=in[1], out=xy); // 110
+	And(a=xy, b=notz, out=g);
+
+	And(a=xy, b=in[2], out=h); // 111
+
+}

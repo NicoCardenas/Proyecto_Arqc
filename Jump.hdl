@@ -1,7 +1,0 @@
-CHIP Jump {
-    IN in[5];
-    OUT out[5];
-
-    PARTS:
-    Register(in[11..15]=in, load=true, out[11..15]=out);
-}

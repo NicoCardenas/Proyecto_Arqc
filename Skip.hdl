@@ -1,8 +1,8 @@
 CHIP Skip {
-    IN a[5], b[16];
-    OUT out[5];
+    IN ac[16], ci[5];
+    OUT ciout[5], acout;
 
     PARTS:
-    Register(in[11..15]=a, load=true, out[11..15]=outAdd);
-    Add16(a[11..15]=outAdd, b[15]=b[15], out[11..15]=out);
+    And(a=true, b=ac[15], out=acout);
+    Inc16(in[0..4]=ci, out[0..4]=ciout);
 }

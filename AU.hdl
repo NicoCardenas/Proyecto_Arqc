@@ -1,15 +1,37 @@
 CHIP AU {
-    IN in[16];
-    OUT out[16], address[5];
+    IN in[16], data[16];
+    OUT Ac[16], Ci[16];
 
     PARTS:
-    AC(in=in, out=ac);
     Instruccion(in=in, address=address1, operation=oper);
-    InstruccionA(in=address1, out=address);
-    Subt16(a=ac, b=in, out=resS);
-    SubtCero16(in=ac, out=resSC);
-    Jump(in=address1, out=outCI); //Jump
-    CI(in=outCI, out=resJ);
-    Skip(a=resJ, b=ac, out=resJR); //Jump relativo / Skip (se suma el bit a la izquierda al ci)
-    Mux8Way16(a[11..15]=resJ, b=resS, c=resSC, d[11..15]=resJR, e=false, f=false, g=false, h=false, sel=oper, out=out); // 000 Jump, 001 Subt, 010 SubtCero, 011 Skip.
+    AC(in=data, load=true, out=outac);
+    CI(in=address1, load=true, out=outci);
+
+    Decoder3x8(in=oper, a=outa, b=outb, c=outc, d=outd, e=oute, f=outf, g=outg, h=outh);
+
+    // 000 Jump
+    CI(in=data[11..15], load=outa, out=Ci0); // CI
+    // 001 o 101 Subt
+    Subt16(a=outac, b=data, out=resS);
+    And(a=outb, b=outf, out=cmpS);
+    AC(in=resS, load=cmpS, out=Ac0); // AC
+    // 010 Load
+    Complement2(in=data, out=notdata);
+    AC(in=notdata, load=outc, out=Ac1); // AC
+    // 011 Skip
+    /*And(a=true, b=outac[15], out=notAc);
+    Inc16(in=outci, out=outci1);*/
+    Skip(ac=outac, ci=outci, ciout=outci1, acout=notAc);
+    And(a=notAc, b=outd, out=cmpSk);
+    CI(in=outci1, load=cmpSk, out=Ci1); // CI
+    // 100 StoreAddCI
+    Add16(a=data, b[0..10]=false, b[11..15]=outci, out[11..15]=outadd, out[0..10]=null);
+    CI(in=outadd, load=oute, out=Ci2); // CI
+    // 110 AcCopyStore
+    AC(in=true, load=false, out=Ac2); // Ac
+    // 111 Stop
+
+    // Salidas
+    Mux8Way16(a=outac, b=Ac0, c=Ac1, d=outac, e=outac, f=Ac0, g=Ac2, h=outac, sel=oper, out=Ac);
+    Mux8Way16(a[11..15]=Ci0, b[11..15]=outci, c[11..15]=outci, d[11..15]=Ci1, e[11..15]=Ci2, f[11..15]=outci, g[11..15]=outci, h[11..15]=outci, sel=oper, out=Ci);
 }
